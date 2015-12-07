@@ -7,7 +7,8 @@ require 'Slim\Slim.php';
 \Slim\Slim::registerAutoloader();
 
 /* Инициализация соединения с БД для NotORM */
-
+$pdo = new PDO('sqlite:rest.db');
+$db = new NotORM($pdo);
 
 /* Создание экземпляра класса Slim */
 
