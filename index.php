@@ -17,6 +17,7 @@ $app = new \Slim\Slim();
 *	Роутинг: определение методов, путей и действий
 */
 
+
 /* Действие по-умолчанию */
 $app->get("/", function() {
     echo "Something by default";
@@ -24,7 +25,17 @@ $app->get("/", function() {
 
 /* Выборка всех книг */
 $app->get("/books/", function() use ($app, $db) {
-
+foreach ($db->books() as $book) {
+	$books[] = [
+	"id" => $book["id"],
+"title" => $book["title"],
+"author" => $book["author"],
+"summary" => $book["summary"]
+	];
+}
+$res = $app->response();
+$res["Content-Type"] = "application/json";
+echo json_encode($books);
 });
 
 /* Получение книги используя её идентификатор */
