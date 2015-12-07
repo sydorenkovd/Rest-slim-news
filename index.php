@@ -103,3 +103,4 @@ $app->delete("/book/:id/", function ($id) use($app, $db) {
 });
 
 /* Запуск приложения */
+$app->run();
