@@ -68,7 +68,21 @@ $app->post("/book/", function () use($app, $db) {
 
 /* »зменение данных книги использу€ еЄ идентификатор */
 $app->put("/book/:id/", function ($id) use ($app, $db) {
-
+	$res = $app->response();
+	$res["Content-Type"] = "application/json";
+	$book = $db->books()->where("id", $id);
+	if ($book->fetch()){
+		$post = $app->request()->put();
+		$result = $book->update($post);
+		echo json_encode([
+			"status" => 1,
+			"message" => "Book updated successfully"
+			]);
+	} else {
+		echo json_encode([
+			"status" => 0,
+			"message" => "Book id $id does not exist"]);
+	}
 });
 
 /* ”даление книги использу€ еЄ идентификатор */
