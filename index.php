@@ -4,7 +4,7 @@ require 'NotORM.php';
 require 'Slim\Slim.php';
 
 /* Инициализация автозагрузчика */
-
+\Slim\Slim::registerAutoloader();
 
 /* Инициализация соединения с БД для NotORM */
 
