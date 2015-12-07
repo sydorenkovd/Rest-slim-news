@@ -40,7 +40,22 @@ echo json_encode($books);
 
 /* Получение книги используя её идентификатор */
 $app->get("/book/:id/", function ($id) use ($app, $db) {
-
+$res = $app->response();
+$res["Content-Type"] = "application/json";
+$book = $db->books()->where("id", $id);
+if ($data = $book->fetch()) {
+	echo json_encode([
+		"id" => $data["id"],
+		"title" => $data["title"],
+		"author" => $data["author"],
+		"summary" => $data["summary"]
+		]);
+} else {
+	echo json_encode([
+		"staus" => 1,
+		"message" => "Book ID $id does not exist"
+		]);
+}
 });
 
 /* Добавление новой книги */
