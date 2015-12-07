@@ -87,7 +87,19 @@ $app->put("/book/:id/", function ($id) use ($app, $db) {
 
 /* Удаление книги используя её идентификатор */
 $app->delete("/book/:id/", function ($id) use($app, $db) {
-
+	$res = $app->response();
+	$res["Content-Type"] = "application/json";
+	$book = $db->books()->where("id", $id);
+	if ($book->fetch()){
+		$result = $book->delete();
+		echo json_encode([
+			"status" => 1,
+			"message" => "Book deleted successfully"]);
+	} else {
+		echo json_encode([
+			"status" => 0,
+			"message" => "Book id $id does not exist"]);
+	}
 });
 
 /* Запуск приложения */
