@@ -1,6 +1,7 @@
 <?php
 /* Подключение библиотек */
-
+require 'NotORM.php';
+require 'Slim\Slim.php';
 
 /* Инициализация автозагрузчика */
 
