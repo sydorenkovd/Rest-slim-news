@@ -11,7 +11,7 @@ $pdo = new PDO('sqlite:rest.db');
 $db = new NotORM($pdo);
 
 /* Создание экземпляра класса Slim */
-
+$app = new \Slim\Slim();
 
 /**
 *	Роутинг: определение методов, путей и действий
