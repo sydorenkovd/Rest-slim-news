@@ -60,7 +60,10 @@ if ($data = $book->fetch()) {
 
 /* Добавление новой книги */
 $app->post("/book/", function () use($app, $db) {
-
+	$res = $app->response();
+	$res["Content-Type"] = "application/json";
+	$book = $app->books->insert($book);
+	echo json_encode(["id" => $result["id"]]);
 });
 
 /* Изменение данных книги используя её идентификатор */
